@@ -16,6 +16,9 @@ To get this running, simply run the  the following
 
 
 ## Step 1: clone this repository
+navigate inside the directory
+
+
 ## Step 2: Install requirements.txt
 
 `pip install -r requirements.txt`
