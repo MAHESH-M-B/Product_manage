@@ -1,4 +1,4 @@
-# django-Product-manage
+# Products Catalogue App
 
 A repository which contain Products Catalogue App which can used for </br>
 1,Load the products in the  excel to database</br>
