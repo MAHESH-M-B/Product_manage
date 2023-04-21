@@ -16,7 +16,7 @@ To get this running, simply run the  the following
 
 
 ## Step 1: clone this repository
-navigate inside the directory
+navigate inside the directory create a virtual environment if you wish 
 
 
 ## Step 2: Install requirements.txt
@@ -29,7 +29,7 @@ Create the databases and the initial migrations with the following command:</br>
 `python manage.py makemigrations`</br>
 `python manage.py migrate`
 
-## Step 3: Run server
+## Step 4: Run server
 
 And start the server with 
 
