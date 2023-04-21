@@ -10,22 +10,19 @@
         <input type="text" name="search_term" placeholder="Product Name">
         <button type="submit">Search</button>
     </form>
-    {% if children %}
-        <h2>Child Products of "{{ search_term }}"</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Item Name</th>
-                </tr>
-            </thead>
-            <tbody>
-            {% for child in children %}
-                <tr>
-                    <td>{{ child }}</td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
+    <h1>Children of {{ parent_product.item_name }}</h1>
+    {% if error %}
+    <p>{{ error }}</p>
+    {% else %}
+    {% if child_names %}
+    <ul>
+    {% for child_name in child_names %}
+    <li>{{ child_name }}</li>
+    {% endfor %}
+    </ul>
+    {% else %}
+    <p>No children found.</p>
+    {% endif %}
     {% endif %}
 </body>
 </html>

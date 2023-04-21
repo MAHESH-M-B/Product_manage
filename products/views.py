@@ -9,7 +9,7 @@ from django.contrib import messages
 from django.db import models
 from django.shortcuts import render
 from .models import Product
-
+from django.db.models import Avg
 
 def home(request):
     return render(request, 'home.html')
@@ -107,8 +107,6 @@ def upload_excel(request):
 
 
 
-
-
 def get_top_most_parent(request):
     search_term = request.GET.get('search_term', '')
     product = Product.objects.filter(item_name=search_term).first() or Product.objects.filter(item_code=search_term).first()
@@ -127,28 +125,42 @@ def get_top_most_parent(request):
     
     return render(request, 'product_search.html', {'product': product, 'parent_product': parent_product, 'child_products': child_products})
 
+
+
+# def get_children(request):
+#     search_term = request.GET.get('search_term', '')
+#     try:
+#         parent_product = Product.objects.get(item_name=search_term)
+#     except Product.DoesNotExist:
+#         return render(request, 'products_children.html', {'error': 'Product not found.'})
+#     child_products = Product.objects.filter(parent_code=parent_product.item_code).order_by('item_name')
+
+#     child_names = [p.item_name for p in child_products]
+
+#     context = {
+#         'parent_product': parent_product,
+#         'child_names': child_names,
+#     }
+#     return render(request, 'products_children.html', context)
+
 def get_children(request):
-    search_term=request.GET.get('search_term', '')
-    product = Product.objects.filter(item_name=search_term).first()
-    print(product)
-    # children = Product.objects.filter(parent_code=product.item_code).order_by('item_name')
-    # return render(request, 'product_children.html', {'children': children})
-    return render(request, 'products_children.html')
+    search_term = request.GET.get('search_term', '')
+    parent_products = Product.objects.filter(item_name=search_term)
+    if not parent_products.exists():
+        return render(request, 'products_children.html', {'error': 'Product not found.'})
+
+    child_products = Product.objects.filter(parent_code=parent_products.first().item_code).order_by('item_name')
+    child_names = [p.item_name for p in child_products]
+
+    context = {
+        'parent_product': parent_products.first(),
+        'child_names': child_names,
+    }
+    return render(request, 'products_children.html', context)
 
 
 
-# def product_children(request):
-#     search_term = request.GET.get('search_term')
-#     children = []
-#     if search_term:
-#         children = get_children(search_term)
-#     return render(request, 'product_children.html', {'children': children, 'search_term': search_term})
 
-
-# def count_active_inactive_products():
-#     active_count = Product.objects.filter(enabled=True).count()
-#     inactive_count = Product.objects.filter(enabled=False).count()
-#     return active_count, inactive_count
 
 def active_inactive_products(request):
     active_count = Product.objects.filter(enabled="Yes").count()
@@ -162,16 +174,16 @@ def active_inactive_products(request):
     print(context)
     return render(request, 'active_count.html', context)
 
-# def get_average_product_price():
-#     category_l1_avg_price = Product.objects.values('category_l1').annotate(avg_price = models.Avg('mrp_price')).values_list('category_l1', 'avg_price')
-#     category_l2_avg_price = Product.objects.values('category_l1', 'category_l2').annotate(avg_price = models.Avg('mrp_price')).values_list('category_l1', 'category_l2', 'avg_price')
-#     return category_l1_avg_price, category_l2_avg_price
+
 
 
 def average_product_price(request):
-    category_l1_avg_price = Product.objects.values('category_l1').annotate(avg_price = models.Avg('mrp_price')).values_list('category_l1', 'avg_price')
-    category_l2_avg_price = Product.objects.values('category_l1', 'category_l2').annotate(avg_price = models.Avg('mrp_price')).values_list('category_l1', 'category_l2', 'avg_price')
-    avg_prices = {
-        'avg_prices': category_l2_avg_price
+    l1_prices = Product.objects.values('category_l1').annotate(avg_price = models.Avg('mrp_price')).values_list('category_l1', 'avg_price')
+    l2_prices = Product.objects.values('category_l1', 'category_l2').annotate(avg_price = models.Avg('mrp_price')).values_list('category_l1', 'category_l2', 'avg_price')
+    print(l1_prices)
+    print(l2_prices)
+    context = {
+        'l1_prices': l1_prices,
+        'l2_prices': l2_prices,
     }
-    return render(request, 'average_price.html', avg_prices)
+    return render(request, 'average_price.html', context)
