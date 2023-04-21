@@ -1,8 +1,6 @@
 
 import pandas as pd
 from django.shortcuts import render,redirect
-from django.http import HttpResponse
-from .forms import UploadExcelForm
 from .models import Product
 from django.contrib import messages
 
@@ -125,23 +123,6 @@ def get_top_most_parent(request):
     
     return render(request, 'product_search.html', {'product': product, 'parent_product': parent_product, 'child_products': child_products})
 
-
-
-# def get_children(request):
-#     search_term = request.GET.get('search_term', '')
-#     try:
-#         parent_product = Product.objects.get(item_name=search_term)
-#     except Product.DoesNotExist:
-#         return render(request, 'products_children.html', {'error': 'Product not found.'})
-#     child_products = Product.objects.filter(parent_code=parent_product.item_code).order_by('item_name')
-
-#     child_names = [p.item_name for p in child_products]
-
-#     context = {
-#         'parent_product': parent_product,
-#         'child_names': child_names,
-#     }
-#     return render(request, 'products_children.html', context)
 
 def get_children(request):
     search_term = request.GET.get('search_term', '')
