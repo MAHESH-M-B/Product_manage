@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
     <title>Product Children</title>
 </head>
+
 <body>
     <h1>Search Children</h1>
     <form method="GET">
@@ -16,13 +18,14 @@
     {% else %}
     {% if child_names %}
     <ul>
-    {% for child_name in child_names %}
-    <li>{{ child_name }}</li>
-    {% endfor %}
+        {% for child_name in child_names %}
+        <li>{{ child_name }}</li>
+        {% endfor %}
     </ul>
     {% else %}
     <p>No children found.</p>
     {% endif %}
     {% endif %}
 </body>
+
 </html>

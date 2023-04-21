@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
     <title>Search Product</title>
 </head>
+
 <body>
     <h1>Search Product</h1>
     <form method="GET">
@@ -11,17 +13,18 @@
         <button type="submit">Search</button>
     </form>
     {% if product %}
-        <ul>
-            <li> <b> Parent  {{ product.parent_code }}</b></li>
-            <li>Item Code: {{ product.item_code }}</li>
-            <li>Item Name: {{ product.item_name }}</li>
-            <li>Category L1: {{ product.category_l1 }}</li>
-            <li>Category L2: {{ product.category_l2 }}</li>
-            <li>UPC: {{ product.upc }}</li>  
-            <li>MRP Price: {{ product.mrp_price }}</li>
-            <li>Size: {{ product.size }}</li>
-            <li>Enabled: {{ product.enabled }}</li>
-        </ul>
+    <ul>
+        <li> <b> Parent {{ product.parent_code }}</b></li>
+        <li>Item Code: {{ product.item_code }}</li>
+        <li>Item Name: {{ product.item_name }}</li>
+        <li>Category L1: {{ product.category_l1 }}</li>
+        <li>Category L2: {{ product.category_l2 }}</li>
+        <li>UPC: {{ product.upc }}</li>
+        <li>MRP Price: {{ product.mrp_price }}</li>
+        <li>Size: {{ product.size }}</li>
+        <li>Enabled: {{ product.enabled }}</li>
+    </ul>
     {% endif %}
 </body>
+
 </html>

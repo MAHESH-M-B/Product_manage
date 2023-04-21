@@ -1,25 +1,27 @@
-
 <!DOCTYPE html>
 <html>
+
 <head>
-    <meta charset="UTF-8">
-    <title>Active and Inactive Products Count</title>
+  <meta charset="UTF-8">
+  <title>Active and Inactive Products Count</title>
 </head>
+
 <body>
   <h2>Average Product Prices</h2>
 
   <h3>Category L1</h3>
   <ul>
-  {% for l1 in l1_prices %}
-      <li>{{ l1.0 }}: {{ l1.1|floatformat:2 }}</li>
-  {% endfor %}
+    {% for l1 in l1_prices %}
+    <li>{{ l1.0 }}: {{ l1.1|floatformat:2 }}</li>
+    {% endfor %}
   </ul>
-  
+
   <h3>Category L2</h3>
   <ul>
-  {% for l2 in l2_prices %}
-      <li>{{ l2.0 }} - {{ l2.1 }}: {{ l2.2|floatformat:2 }}</li>
-  {% endfor %}
+    {% for l2 in l2_prices %}
+    <li>{{ l2.0 }} - {{ l2.1 }}: {{ l2.2|floatformat:2 }}</li>
+    {% endfor %}
   </ul>
 </body>
+
 </html>
