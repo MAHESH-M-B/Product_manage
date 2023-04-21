@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Search Product</title>
+</head>
+<body>
+    <h1>Search Product</h1>
+    <form method="GET">
+        <input type="text" name="search_term" placeholder="Product Name or Code">
+        <button type="submit">Search</button>
+    </form>
+    {% if product %}
+        <h2>Product Details</h2>
+        <ul>
+            <li>Item Code: {{ product.item_code }}</li>
+            <li>Item Name: {{ product.item_name }}</li>
+            <li>Category L1: {{ product.category_l1 }}</li>
+            <li>Category L2: {{ product.category_l2 }}</li>
+            <li>UPC: {{ product.upc }}</li>
+            <li>Parent Code: {{ product.parent_code }}</li>
+            <li>MRP Price: {{ product.mrp_price }}</li>
+            <li>Size: {{ product.size }}</li>
+            <li>Enabled: {{ product.enabled }}</li>
+        </ul>
+        {% if parent_product %}
+            <h2>Top-Most Parent Product Details</h2>
+            <ul>
+                <li>Item Code: {{ parent_product.item_code }}</li>
+                <li>Item Name: {{ parent_product.item_name }}</li>
+                <li>Category L1: {{ parent_product.category_l1 }}</li>
+                <li>Category L2: {{ parent_product.category_l2 }}</li>
+                <li>UPC: {{ parent_product.upc }}</li>
+                <li>Parent Code: {{ parent_product.parent_code }}</li>
+                <li>MRP Price: {{ parent_product.mrp_price }}</li>
+                <li>Size: {{ parent_product.size }}</li>
+                <li>Enabled: {{ parent_product.enabled }}</li>
+            </ul>
+        {% endif %}
+    {% endif %}
+</body>
+</html>

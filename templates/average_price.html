@@ -1,0 +1,33 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Active and Inactive Products Count</title>
+</head>
+<body>
+  <h1>Average Price</h1>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Category L1</th>
+        <th>Category L2</th>
+        <th>Average Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for avg_price in avg_prices %}
+        <tr>
+          <td>{{ acategory_l1 }}</td>
+          <td>{{ category_l2 }}</td>
+          <td>{{ avg_price }}</td>
+        </tr>
+      {% empty %}
+        <tr>
+          <td colspan="3">No data found.</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</body>
+</html>
