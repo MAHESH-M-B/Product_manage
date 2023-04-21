@@ -23,7 +23,7 @@ To get this running, simply run the  the following
 ## Step 3: Create databases
 
 Create the databases and the initial migrations with the following command:</br>
-`python manage.py makemigrations`
+`python manage.py makemigrations`</br>
 `python manage.py migrate`
 
 ## Step 3: Run server
