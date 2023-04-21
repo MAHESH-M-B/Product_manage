@@ -144,8 +144,11 @@ def get_children(request):
 
 
 def active_inactive_products(request):
-    active_count = Product.objects.filter(enabled="Yes").count()
-    inactive_count = Product.objects.filter(enabled="No").count()
+    active_count = Product.objects.filter(enabled__in=["Yes", "Y"]).count()
+    # active_count = Product.objects.filter(enabled="Yes").count()
+    inactive_count = Product.objects.filter(enabled__in=["No", "N"]).count()
+
+    # inactive_count = Product.objects.filter(enabled="No").count()
     print(active_count)
     print(inactive_count)
     context = {
