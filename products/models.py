@@ -2,7 +2,6 @@
 # Create your models here.
 from django.db import models
 
-
 class Product(models.Model):
     item_code = models.CharField(max_length=50)
     item_name = models.CharField(max_length=100)

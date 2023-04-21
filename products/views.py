@@ -123,17 +123,17 @@ def get_top_most_parent(request):
 
 def get_children(request):
     search_term = request.GET.get('search_term', '')
-    parent_products = Product.objects.filter(item_name=search_term)
-    if not parent_products.exists():
-        return render(request, 'products_children.html', {'error': 'Product not found.'})
+    # parent_products = Product.objects.filter(item_name=search_term)
+    # if not parent_products.exists():
+    #     return render(request, 'products_children.html', {'error': 'Product not found.'})
 
-    child_products = Product.objects.filter(
-        parent_code=parent_products.first().item_code).order_by('item_name')
-    # child_products = Product.objects.filter(parent_code=search_term)
-    child_names = [p.item_name for p in child_products]
+    # child_products = Product.objects.filter(
+    #     parent_code=parent_products.first().item_code).order_by('item_name')
+    child_products = Product.objects.filter(parent_code=search_term)
+    child_names = [p.item_code for p in child_products]
 
     context = {
-        'parent_product': parent_products.first(),
+        # 'parent_product': parent_products.first(),
         'child_names': child_names,
     }
     return render(request, 'products_children.html', context)
