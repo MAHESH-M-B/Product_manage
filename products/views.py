@@ -129,6 +129,7 @@ def get_children(request):
 
     child_products = Product.objects.filter(
         parent_code=parent_products.first().item_code).order_by('item_name')
+    # child_products = Product.objects.filter(parent_code=search_term)
     child_names = [p.item_name for p in child_products]
 
     context = {
